@@ -25,7 +25,7 @@
 								<label for="selectAll"></label>
 							</span>
                     </th>
-                    <th>Name</th>
+                    <th>Name <a href="?_sort&column=name&type=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a></th>
                     <th>Email</th>
                     <th>City</th>
                     <th>Phone</th>
@@ -91,13 +91,15 @@
             <div class="clearfix">
                 <div class="hint-text">Showing <b>{{list.limitFrom}}</b> to <b>{{list.limitTo}}</b> out of <b>{{list.total}}</b> entries</div>
                 <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    <li class="page-item "><a href="/employee/list/{{list.prevPage}}" class="page-link">Previous</a></li>
+                    {{#each list.size}}
+                    <li class="page-item"  ><a href="/employee/list/{{this}}" class="page-link">{{this}}</a></li>
+                    {{/each}}
+<!--                    <li class="page-item"><a href="#" class="page-link">2</a></li>-->
+<!--                    <li class="page-item active"><a href="#" class="page-link">3</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">4</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">5</a></li>-->
+                    <li class="page-item"><a href="/employee/list/{{list.nextPage}}" class="page-link">Next</a></li>
                 </ul>
             </div>
         </div>

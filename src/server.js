@@ -1,11 +1,13 @@
 const connectDB = require('./config/db');
 const express = require('express');
 const path = require('path');
-const {engine} = require('express-handlebars');
+const {engine, create} = require('express-handlebars');
 const bodyparser = require('body-parser');
 require("dotenv").config();
 const employeeRouter = require('./routes/employeeRouter');
 const methodOverride = require("method-override");
+
+
 
 //setup port
 const port = process.env.PORT || 4000;
@@ -24,6 +26,16 @@ app.use(bodyparser.urlencoded({
     extended: true
 }));
 
+
+
+//setup helper for handlebars
+const hbs = create({
+
+
+
+})
+
+
 //setup view engine
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', engine({
@@ -32,6 +44,7 @@ app.engine('hbs', engine({
     layoutsDir: path.join(__dirname, "views", "layouts")
 }));
 app.set('view engine', 'hbs');
+
 
 //setup middleware to use static (public) files
 app.use(express.static(path.join(__dirname, "public")))

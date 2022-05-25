@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     // Select/Deselect checkboxes
-    var checkbox = $('table tbody input[type="checkbox"]');
+    let checkbox = $('table tbody input[type="checkbox"]');
     $("#selectAll").click(function () {
         if (this.checked) {
             checkbox.each(function () {
@@ -20,4 +20,19 @@ $(document).ready(function () {
             $("#selectAll").prop("checked", false);
         }
     });
+
+    if (location.pathname.includes("/employee/list/")) {
+        let currentPage = location.pathname.slice("/employee/list/".length);
+        if (!currentPage || isNaN(currentPage)) {
+            currentPage = "1"
+        }
+
+        let pagination = $(".page-item");
+        for (const paginationElement of pagination) {
+            if (currentPage === paginationElement.querySelector("a").text) {
+                paginationElement.classList.add("active")
+            }
+        }
+    }
+
 });
