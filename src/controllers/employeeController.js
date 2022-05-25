@@ -84,11 +84,10 @@ class EmployeeController {
             const limitTo = page < numbersPage ? limitFrom + perPage : total;
 
 
-            let docs ; /*= await Employee.find()
+            let docs, sortStr ; /*= await Employee.find()
                 .skip(limitFrom)
                 .limit(perPage)
                 .lean();*/
-
 
             if (req.query.hasOwnProperty("_sort")) {
                 docs = await Employee.find()
@@ -98,6 +97,7 @@ class EmployeeController {
                     .skip(limitFrom)
                     .limit(perPage)
                     .lean();
+                sortStr = "?_sort&column=name&type=asc"
             } else {
                 docs = await Employee.find()
                     .skip(limitFrom)
@@ -105,12 +105,12 @@ class EmployeeController {
                     .lean();
             }
 
-
+            docs.sortStr = sortStr;
             docs.page = page;
             docs.total = total;
             const size = [];
             for (let i = 1; i <= numbersPage; i++) {
-                size.push(i)
+                size.push({page : i, sortStr})
             }
             docs.prevPage = page > 1 ? page - 1 : 1;
             docs.nextPage = page < numbersPage ? page + 1 : numbersPage;
